@@ -14,7 +14,7 @@ class Cube:
     squish = x * ( 4.0 / self.outSize )
     return (squish + np.array([-2] * len(x)))
     
-  def getPtonSphere(x):
+  def getPtonSphere(self,x):
     if not np.any(x): #if zero vector
       ret = np.zeros(len(x)+1)
       ret[-1] = 1
@@ -26,7 +26,7 @@ class Cube:
   def getCubeCoordinate(self, x):
     return
 
-  def transfromToSquare(self, x):
+  def transformToSquare(self, x):
     return (x + 1) * self.outSize / 2
   
   def getColor(self, x):

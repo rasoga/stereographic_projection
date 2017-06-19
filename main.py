@@ -9,9 +9,11 @@ from classes.cube import Cube
 
 print("Willkommen")
 
-mCube = Cube("hi")
+mCube = Cube(Image.open("earth.jpg"))
 
 testVec = np.array([4,4])
 print(testVec)
 
 print(mCube.coordinateTransformation(testVec))
+
+print(mCube.getPtonSphere(mCube.coordinateTransformation(testVec)))

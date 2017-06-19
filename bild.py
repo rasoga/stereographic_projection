@@ -6,6 +6,8 @@ import numpy as np
 
 import progressbar
 
+import cv2
+
 original_name = "test.jpg"
 output_name = "yay.jpg"
 
@@ -57,7 +59,7 @@ print("Done cropping.")
 # Get a pixel accessor.
 pixels = im.load()
 
-#define image
+# define image
 mResult = Image.new("RGB", (4*boxRad, 4*boxRad), "white")
 draw = ImageDraw.Draw(mResult)
 
@@ -83,7 +85,7 @@ for x in bar(range(boxRad*2)):
       # stereographic projection
       newCoord = normCoord[:-1] / (1 - normCoord[-1]) * 2 * boxRad
 
-      #shift to middle and round
+      # shift to middle and round
       newCoord = np.round(newCoord + np.array([2*boxRad] * 2))
       
       if inBox(newCoord, boxRad): #alles, was noch im bild liegt malen
@@ -96,4 +98,10 @@ print("Transformation done.")
 
 # Save file to output_name
 mResult.save(output_name, "JPEG")
+
+img = cv2.imread(output_name)
+blur = cv2.GaussianBlur(img, (10, 10), 0)
+blur = cv2.bilateralFilter(img, 9, 75, 75)
+cv2.imwrite('yaz.jpg', blur)
+
 

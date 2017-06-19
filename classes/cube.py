@@ -25,15 +25,16 @@ class Cube:
     return np.concatenate((ret, [ ( ( 1.0 / norm**2 ) - 1 ) / ( ( 1.0 / norm**2 ) + 1 ) ] ))
     
   def getCubeCoordinate(self, x):
-    return x / np.maximum(np.abs(x))
+    m = max(np.abs(x))
+    return np.array(x) / m
 
   def transformToSquare(self, x):
     return (x + 1) * self.outSize / 2
   
   def getColor(self, x):
     for i in range(len(x)):
-      if np.abs(x[i]) == 1:
-        del x[i]
+      if np.abs(x[i]) == 1.0:
+        x = np.delete(x, i)
         break
 
     y,z = self.transformToSquare(x)

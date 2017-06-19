@@ -1,2 +1,9 @@
 *.jpg
 *.jpeg
+*~
+*.py~
+__pycache__
+*/__pycache__/*
+classes/__pycache__
+classes/__pycache__/*
+classes/__pycache__/__init__.cpython-35.pyc

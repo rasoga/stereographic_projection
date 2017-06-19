@@ -12,33 +12,34 @@ class Cube:
     self.pixels = self.image.load()
     self.image.save("crop.jpg", "JPEG")
     
-  def coordinateTransformation(self,x,h):
-    squish = x * ( 4.0 / h )
-    return (squish + np.array([-2] * len(x)))
+  def coordinateTransformation(self, x, h):
+    squish = x * 4.0 / h 
+    return (squish - np.array([2] * len(x)))
     
-  def getPtonSphere(self,x):
-    if not np.any(x): #if zero vector
-      ret = np.zeros(len(x)+1)
-      ret[-1] = 1
-      return ret
+  def getPtonSphere(self, x):
     norm = np.linalg.norm(x)
-    ret = x * np.array([( 2.0 / norm**2 ) + 1] * len(x))
-    return np.concatenate((ret, [ ( ( 1.0 / norm**2 ) - 1 ) / ( ( 1.0 / norm**2 ) + 1 ) ] ))
+    ret = x * 2.0 / (norm**2 + 1)
+    return np.concatenate(ret, [(norm**2  - 1) / (norm**2  + 1)])
     
   def getCubeCoordinate(self, x):
     m = max(np.abs(x))
     return np.array(x) / m
 
   def transformToSquare(self, x):
-    return np.round((x + 1) * self.outSize / 2)
+    return np.floor((x + 1) * self.outSize / 2)
   
   def getColor(self, x):
     for i in range(len(x)):
       if np.abs(x[i]) == 1.0:
         x = np.delete(x, i)
         break
-
+    if len(x) != 2:
+      raise Exception("Not on boundary")
+    if max(np.abs(x)) > 1:
+      raise Exception("Not in square")
+    
     y,z = self.transformToSquare(x)
+    print(y, z, flush=True)
 
     return self.pixels[y,z]
 

@@ -10,9 +10,6 @@ class Cube:
                    np.round(.5*img.size[0])+self.outSize,
                    np.round(.5*img.size[1])+self.outSize])
     self.pixels = self.image.load()
-  
-  def generateImage():
-    return
     
   def coordinateTransformation(self,x):
     squish = x * ( 4.0 / self.outSize )
@@ -42,3 +39,19 @@ class Cube:
     y,z = self.transformToSquare(x)
 
     return self.pixels[y,z]
+
+  def generateImage(self,nSize):
+    newPic = Image.new("RGB", (nSize,nSize), "white")
+    draw = ImageDraw.Draw(newPic)
+    
+    for x in range(0,nSize):
+      for y in range(0,nSize):
+        scaleDown = self.coordinateTransformation(np.array([x,y]))
+        onSphere = self.getPtonSphere(scaleDown)
+        onCube = self.getCubeCoordinate(onSphere)
+        nColor = self.getColor(onCube)
+        
+        draw.point((x,y), fill = nColor)
+        
+    del draw
+    return newPic

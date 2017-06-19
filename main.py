@@ -11,9 +11,7 @@ print("Willkommen")
 
 mCube = Cube(Image.open("earth.jpg"))
 
-testVec = np.array([4,4])
-print(testVec)
+mResult = mCube.generateImage(500)
 
-print(mCube.coordinateTransformation(testVec))
-
-print(mCube.getPtonSphere(mCube.coordinateTransformation(testVec)))
+# Save file to output_name
+mResult.save("final.jpg", "JPEG")

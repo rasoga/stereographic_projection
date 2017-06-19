@@ -61,9 +61,6 @@ pixels = im.load()
 mResult = Image.new("RGB", (4*boxRad, 4*boxRad), "white")
 draw = ImageDraw.Draw(mResult)
 
-m2 = Image.new("RGB", (2*boxRad, 2*boxRad), "white")
-d2 = ImageDraw.Draw(m2)
-
 print("Start transformation.")
 
 bar = progressbar.ProgressBar()
@@ -73,7 +70,6 @@ bar = progressbar.ProgressBar()
 for x in bar(range(boxRad*2)):
   for y in range(boxRad*2):
     px = pixels[x,y]
-    d2.point([x, y], fill = px)
     for i in range(6):
       # Compute coordinates on one of the six sides of the cube
       # Afterwards project on unit sphere.
@@ -100,4 +96,4 @@ print("Transformation done.")
 
 # Save file to output_name
 mResult.save(output_name, "JPEG")
-m2.save("blubb.jpg")
+

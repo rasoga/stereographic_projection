@@ -1,15 +1,10 @@
 #!/usr/bin/python
-from PIL import Image, ImageDraw
-import math
-import numpy as np
-
-import progressbar
-
+from PIL import Image
 from classes.cube import Cube
 
 print("Willkommen")
 
-mCube = Cube(Image.open("earth.jpg"))
+mCube = Cube(Image.open("test.jpg"))
 
 mResult = mCube.generateImage(500)
 

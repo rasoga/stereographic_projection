@@ -28,14 +28,14 @@ class Cube:
     return np.concatenate((ret, [ ( ( 1.0 / norm**2 ) - 1 ) / ( ( 1.0 / norm**2 ) + 1 ) ] ))
     
   def getCubeCoordinate(self, x):
-    return
+    return x / np.maximum(x)
 
   def transformToSquare(self, x):
     return (x + 1) * self.outSize / 2
   
   def getColor(self, x):
     for i in range(len(x)):
-      if x[i] == 1:
+      if np.abs(x[i]) == 1:
         del x[i]
         break
 

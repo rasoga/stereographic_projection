@@ -24,7 +24,7 @@ class Cube:
     return np.concatenate((ret, [ ( ( 1.0 / norm**2 ) - 1 ) / ( ( 1.0 / norm**2 ) + 1 ) ] ))
     
   def getCubeCoordinate(self, x):
-    return x / np.maximum(x)
+    return x / np.maximum(np.abs(x))
 
   def transfromToSquare(self, x):
     return (x + 1) * self.outSize / 2

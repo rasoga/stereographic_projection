@@ -4,7 +4,11 @@ import numpy as np
 class Cube:
   def __init__(self, img):
     self.outSize = min(img.height, img.width)
-    self.image = img.crop([0, 0, self.outSize, self.outSize])
+    self.image = img.crop(
+                  [np.round(.5*img.size[0])-self.outSize,
+                   np.round(.5*img.size[1])-self.outSize,
+                   np.round(.5*img.size[0])+self.outSize,
+                   np.round(.5*img.size[1])+self.outSize])
     self.pixels = self.image.load()
   
   def generateImage():

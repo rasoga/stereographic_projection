@@ -1,9 +1,11 @@
+from PIL import Image, ImageDraw
 import numpy as np
 
 class Cube:
-  def __init__(self,img):
-    self.image = img
-    self.outSize = 10.0
+  def __init__(self, img):
+    self.outSize = min(img.height, img.width)
+    self.image = img.crop([0, 0, self.outSize, self.outSize])
+    self.pixels = self.image.load()
   
   def generateImage():
     return
@@ -21,8 +23,18 @@ class Cube:
     ret = x * np.array([( 2.0 / norm**2 ) + 1] * len(x))
     return np.concatenate((ret, [ ( ( 1.0 / norm**2 ) - 1 ) / ( ( 1.0 / norm**2 ) + 1 ) ] ))
     
-  def getCubeCoordinate(x):
+  def getCubeCoordinate(self, x):
     return
+
+  def transfromToSquare(self, x):
+    return (x + 1) * self.outSize / 2
   
-  def getColor(x):
-    return
+  def getColor(self, x):
+    for i in range(len(x)):
+      if x[i] == 1:
+        del x[i]
+        break
+
+    y,z = self.transformToSquare(x)
+
+    return self.pixels[y,z]

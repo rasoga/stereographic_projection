@@ -12,8 +12,8 @@ class Cube:
     self.pixels = self.image.load()
     self.image.save("crop.jpg", "JPEG")
     
-  def coordinateTransformation(self,x):
-    squish = x * ( 4.0 / self.outSize )
+  def coordinateTransformation(self,x,h):
+    squish = x * ( 4.0 / h )
     return (squish + np.array([-2] * len(x)))
     
   def getPtonSphere(self,x):
@@ -48,7 +48,7 @@ class Cube:
     
     for x in range(0,nSize):
       for y in range(0,nSize):
-        scaleDown = self.coordinateTransformation(np.array([x,y]))
+        scaleDown = self.coordinateTransformation(np.array([x,y]),nSize)
         onSphere = self.getPtonSphere(scaleDown)
         onCube = self.getCubeCoordinate(onSphere)
         nColor = self.getColor(onCube)

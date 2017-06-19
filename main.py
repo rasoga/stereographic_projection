@@ -4,9 +4,9 @@ from classes.cube import Cube
 
 print("Willkommen")
 
-mCube = Cube(Image.open("test.jpg"))
+mCube = Cube(Image.open("test_images/cat.jpg"))
 
-mResult = mCube.generateImage(500)
+mResult = mCube.generateImage(1000)
 
 # Save file to output_name
 mResult.save("final.jpg", "JPEG")
